@@ -1,0 +1,50 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.body {
+  width: 100vw;
+  height: 100vh;
+}
+
+.weatherApp {
+  display: flex;
+  flex-direction: column;
+}
+
+.switcher {
+  width: 80px;
+  align-self: end;
+}
+
+.todayWeather {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-items: center;
+}
+
+.enteredLocation,
+.currentTemp,
+.currentConditions,
+.currentDescription {
+  grid-column: span 2;
+}
+
+.weatherApp {
+  width: 600px;
+  margin: 0 auto;
+}
+
+.day {
+  display: flex;
+  gap: 10px;
+}
+
+form {
+  display: flex;
+  margin: 0 auto;
+  gap: 5px;
+  flex-direction: column;
+  width: 50%;
+}
