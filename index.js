@@ -32,52 +32,54 @@ function handleDOM(location) {
 
 function switchTempListener(element, text) {
   const switchBtn = document.querySelector(".switcher");
-  switchBtn.classList.add("celsius");
+  switchBtn.removeEventListener("click", switchTemps);
+  switchBtn.addEventListener("click", switchTemps);
+}
+
+function switchTemps() {
+  const switchBtn = document.querySelector(".switcher");
+  if (!switchBtn.classList.contains("fahrenheit")) {
+    switchBtn.classList.add("celsius");
+  }
   const temps = document.querySelectorAll(".temp");
 
-  switchBtn.addEventListener("click", () => {
-    temps.forEach((temp, index) => {
-      if (index === 0) {
-        let num = temp.innerText;
-        num = num.substring(0, num.length - 1);
+  temps.forEach((temp, index) => {
+    if (index === 0) {
+      let num = temp.innerText;
+      num = num.substring(0, num.length - 1);
 
-        if (switchBtn.classList.contains("celsius")) {
-          const fahrenheit = Math.round(((num * 9) / 5 + 32) * 10) / 10;
-          temp.innerText = fahrenheit + "°";
-        } else if (switchBtn.classList.contains("fahrenheit")) {
-          const celsius = Math.round((((num - 32) * 5) / 9) * 10) / 10;
-          temp.innerText = celsius + "°";
+      if (switchBtn.classList.contains("celsius")) {
+        const fahrenheit = Math.round(((num * 9) / 5 + 32) * 10) / 10;
+        temp.innerText = fahrenheit + "°";
+      } else if (switchBtn.classList.contains("fahrenheit")) {
+        const celsius = Math.round((((num - 32) * 5) / 9) * 10) / 10;
+        temp.innerText = celsius + "°";
+      }
+    }
+
+    if (index !== 0) {
+      const array = temp.innerText.split(":");
+      array[1] = array[1].substring(0, array[1].length - 1);
+
+      if (switchBtn.classList.contains("celsius")) {
+        const fahrenheit = Math.round(((array[1] * 9) / 5 + 32) * 10) / 10;
+        temp.innerText = array[0] + ": " + fahrenheit + "°";
+        if (index === temps.length - 1) {
+          switchBtn.classList.remove("celsius");
+          switchBtn.classList.add("fahrenheit");
+          switchBtn.innerText = "Celsius";
+        }
+      } else if (switchBtn.classList.contains("fahrenheit")) {
+        const celsius = Math.round((((array[1] - 32) * 5) / 9) * 10) / 10;
+        temp.innerText = array[0] + ": " + celsius + "°";
+        if (index === temps.length - 1) {
+          switchBtn.classList.remove("fahrenheit");
+          switchBtn.classList.add("celsius");
+          switchBtn.innerText = "Fahrenheit";
         }
       }
-
-      if (index !== 0) {
-        const array = temp.innerText.split(":");
-        array[1] = array[1].substring(0, array[1].length - 1);
-
-        if (switchBtn.classList.contains("celsius")) {
-          const fahrenheit = Math.round(((array[1] * 9) / 5 + 32) * 10) / 10;
-          temp.innerText = array[0] + ": " + fahrenheit + "°";
-          if (index === temps.length - 1) {
-            switchBtn.classList.remove("celsius");
-            switchBtn.classList.add("fahrenheit");
-            switchBtn.innerText = "Celsius";
-          }
-        } else if (switchBtn.classList.contains("fahrenheit")) {
-          const celsius = Math.round((((array[1] - 32) * 5) / 9) * 10) / 10;
-          temp.innerText = array[0] + ": " + celsius + "°";
-          if (index === temps.length - 1) {
-            switchBtn.classList.remove("fahrenheit");
-            switchBtn.classList.add("celsius");
-            switchBtn.innerText = "Fahrenheit";
-          }
-        }
-      }
-    });
+    }
   });
-
-  // const fahrenheit = (temp[1] * 9) / 5 + 32;
-
-  // const celsius = ((temp[1] - 32) * 5) / 9;
 }
 
 function createDOMElement(parent, className, text, temp, icon) {
@@ -145,6 +147,20 @@ async function getWeather(location) {
   }
 }
 
-getWeather("Sydney");
+const weatherLookupDOM = (function () {
+  const submitBtn = document.getElementById("submit-button");
+  const input = document.getElementById("location");
+  const switchBtn = document.querySelector(".switcher");
 
-// °
+  submitBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    getWeather(input.value);
+    input.value = "";
+
+    if (switchBtn.classList.contains("fahrenheit")) {
+      switchBtn.classList.remove("fahrenheit");
+      switchBtn.classList.add("celsius");
+      switchBtn.innerText = "Fahrenheit";
+    }
+  });
+})();
