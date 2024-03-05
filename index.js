@@ -130,7 +130,6 @@ async function parseWeatherData(response) {
 
     handleDOM(location);
   } catch (err) {
-    console.log(err);
     alert("Please enter a valid location");
   }
 }
@@ -140,7 +139,6 @@ async function getWeather(location) {
     let response = await fetch(
       `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?unitGroup=metric&key=KZB76SZB8M6YGEES94J6VW5R9&contentType=json`
     );
-    console.log(response);
     return parseWeatherData(response);
   } catch (err) {
     console.log(err);
