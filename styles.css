@@ -3,7 +3,7 @@
   padding: 0;
 }
 
-.body {
+body {
   width: 100vw;
   height: 100vh;
   font-family: sans-serif;
@@ -11,9 +11,20 @@
 
 .weatherApp {
   display: flex;
+  width: 600px;
+  margin: 0 auto;
+  color: white;
   flex-direction: column;
   align-items: center;
   gap: 20px;
+  padding: 2rem;
+  border-radius: 5rem;
+  background: radial-gradient(
+    circle at 12.3% 19.3%,
+    rgb(85, 88, 218) 0%,
+    rgb(95, 209, 249) 100.2%
+  );
+  margin-top: 2rem;
 }
 
 .todayWeather {
@@ -35,13 +46,9 @@
   font-size: 4rem;
 }
 
-.weatherApp {
-  width: 600px;
-  margin: 0 auto;
-}
-
 .weekForecast {
   display: grid;
+  width: 240px;
   grid-template-rows: repeat(7, 1fr);
   padding: 0 15px 0 25px;
 }
@@ -51,11 +58,15 @@
   grid-template-columns: 1fr 1fr 2fr 2fr;
 }
 
+.day > :nth-child(1) {
+  font-weight: bold;
+}
+
 form {
   display: flex;
   align-items: center;
   margin: 0 auto;
-  gap: 5px;
+  gap: 1rem;
   flex-direction: column;
   width: 50%;
 }
@@ -63,11 +74,24 @@ form {
 form > input {
   border-radius: 1rem;
   padding: 0.5rem;
+  border-style: none;
+}
+
+.icon {
+  display: flex;
+}
+
+.icon > img {
+  height: 1rem;
+  margin: 0 auto;
 }
 
 form > button,
 .switcher {
-  padding: 0.5rem;
+  padding: 12px;
+  color: white;
+  font-weight: bold;
   border-radius: 1rem;
   border-style: none;
+  background-color: #3d6cb9;
 }

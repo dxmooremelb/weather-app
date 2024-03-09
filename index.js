@@ -3,6 +3,8 @@ import dayjs from "dayjs";
 function handleDOM(location) {
   const selectedLocation = location.resolvedAddress;
 
+  console.log(location);
+
   location.days.forEach((day, index) => {
     const lowTemp = `L: ${day.tempmin}`;
     const maxTemp = `H: ${day.tempmax}`;
@@ -98,6 +100,12 @@ function createDOMElement(parent, className, text, temp, icon) {
     element.innerText = `${text}°`;
     element.classList.add("temp");
   }
+
+  if (icon) {
+    element.innerHTML = `<img src="./icons/${icon}.png" alt="${icon}-icon">`;
+    element.classList.add("icon");
+  }
+
   target.appendChild(element);
 }
 
