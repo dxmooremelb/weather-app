@@ -9,6 +9,12 @@ body {
   font-family: sans-serif;
 }
 
+.weatherDisplay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .weatherApp {
   display: flex;
   width: 600px;
