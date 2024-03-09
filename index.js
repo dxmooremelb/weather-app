@@ -93,7 +93,7 @@ function createDOMElement(parent, className, text, temp, icon) {
   const element = document.createElement("div");
 
   element.classList.add(`${className}`);
-  element.innerText = `${text}`;
+  element.innerHTML = `${text}`;
   if (temp) {
     element.innerText = `${text}°`;
     element.classList.add("temp");
